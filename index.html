@@ -1,0 +1,2302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jason McNeary | Software Engineer Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio website for Software Engineer Jason McNeary: projects, experience, skills, resume, and contact information." />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --bg-elevated: #101624;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.08);
+      --accent-strong: #6366f1;
+      --accent-2: #22c55e;
+      --accent-2-soft: rgba(34, 197, 94, 0.09);
+      --text: #e5e7eb;
+      --text-soft: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --shadow-soft: 0 18px 60px rgba(15, 23, 42, 0.7);
+      --radius-lg: 18px;
+      --radius-full: 999px;
+      --nav-height: 72px;
+      --max-width: 1100px;
+      --transition-fast: 180ms ease-out;
+      --transition-med: 220ms ease-out;
+    }
+
+    [data-theme="light"] {
+      --bg: #f2f4f8;
+      --bg-alt: #ffffff;
+      --bg-elevated: #ffffff;
+      --accent-soft: rgba(79, 70, 229, 0.07);
+      --accent-2-soft: rgba(34, 197, 94, 0.08);
+      --text: #111827;
+      --text-soft: #6b7280;
+      --border-subtle: rgba(148, 163, 184, 0.5);
+      --shadow-soft: 0 16px 50px rgba(15, 23, 42, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 40%, #000 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='3' stitchTiles='noStitch' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+      z-index: -1;
+    }
+
+    /* Layout */
+    .page-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .inner {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* Header / Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(5, 6, 19, 0.92), rgba(5, 6, 19, 0.7) 60%, transparent);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .nav {
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-avatar {
+      height: 38px;
+      width: 38px;
+      border-radius: var(--radius-full);
+      border: 2px solid rgba(148, 163, 184, 0.5);
+      background: radial-gradient(circle at 20% 0%, #4f46e5, #22c55e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #f9fafb;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.7);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-name {
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .brand-role {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      font-size: 0.88rem;
+    }
+
+    .nav-links a {
+      color: var(--text-soft);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width var(--transition-med);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .btn-nav {
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.22), rgba(15, 23, 42, 0.9));
+      color: #e5e7eb;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: transform 150ms ease-out, box-shadow 150ms ease-out, background 200ms ease-out, border-color 150ms ease-out;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.7);
+    }
+
+    .btn-nav span.icon {
+      font-size: 0.95rem;
+    }
+
+    .btn-nav:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.85);
+      border-color: rgba(129, 140, 248, 0.9);
+    }
+
+    .icon-btn {
+      height: 32px;
+      width: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      background: rgba(15, 23, 42, 0.9);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.98rem;
+      color: var(--text-soft);
+      transition: transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast), box-shadow 150ms ease-out;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(37, 46, 74, 0.98);
+      color: #e5e7eb;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+    }
+
+    .hamburger {
+      display: none;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 3.5rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
+      gap: 2.75rem;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.2rem 0.8rem 0.2rem 0.24rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      gap: 0.42rem;
+      background: radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.18), rgba(15, 23, 42, 0.88));
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+      font-size: 0.75rem;
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 22px;
+      width: 22px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #bbf7d0;
+      font-size: 0.86rem;
+    }
+
+    .pill span {
+      color: var(--text-soft);
+    }
+
+    .hero-title {
+      margin-top: 1.5rem;
+      font-size: clamp(2.3rem, 4vw, 3.2rem);
+      line-height: 1.09;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(120deg, #a855f7, #4f46e5, #22c55e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      margin-top: 1rem;
+      color: var(--text-soft);
+      font-size: 0.97rem;
+      max-width: 34rem;
+    }
+
+    .hero-subtitle strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero-badges {
+      margin-top: 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .hero-badge {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text-soft);
+      display: inline-flex;
+      gap: 0.35rem;
+      align-items: center;
+    }
+
+    .hero-badge span.icon {
+      font-size: 0.9rem;
+    }
+
+    .hero-cta {
+      margin-top: 1.7rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+    }
+
+    .btn-primary, .btn-ghost {
+      border-radius: 999px;
+      font-size: 0.9rem;
+      padding: 0.7rem 1.4rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 500;
+      transition: transform 150ms ease-out, box-shadow 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, #4f46e5, #6366f1, #22c55e);
+      color: #f9fafb;
+      box-shadow: 0 18px 45px rgba(79, 70, 229, 0.65);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 55px rgba(79, 70, 229, 0.75);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-soft);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-1px);
+      color: var(--text);
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-meta {
+      margin-top: 0.8rem;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      display: flex;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    .hero-meta span.dot {
+      height: 4px;
+      width: 4px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.7);
+    }
+
+    .hero-meta span.strong {
+      color: #e5e7eb;
+    }
+
+    /* Hero right side */
+    .hero-profile {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero-card {
+      border-radius: 24px;
+      padding: 1.4rem 1.3rem;
+      background: radial-gradient(circle at 10% 0, rgba(79, 70, 229, 0.32), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.16), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(129, 140, 248, 0.2), transparent 55%);
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.2fr 1.1fr;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .profile-blob {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 20% 0, rgba(248, 250, 252, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 100%, rgba(96, 165, 250, 0.3), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .profile-initials {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.08em;
+      color: rgba(249, 250, 251, 0.96);
+      text-shadow: 0 20px 60px rgba(15, 23, 42, 0.9);
+    }
+
+    .profile-spark {
+      position: absolute;
+      inset: 14%;
+      border-radius: inherit;
+      border: 1px dashed rgba(148, 163, 184, 0.4);
+      mix-blend-mode: screen;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+    }
+
+    .chip {
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      background: rgba(15, 23, 42, 0.94);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+
+    .chip span.label {
+      color: var(--text-soft);
+      font-size: 0.76rem;
+    }
+
+    .chip span.value {
+      font-weight: 600;
+      color: #e5e7eb;
+      font-size: 0.8rem;
+    }
+
+    .chip.accent {
+      border-color: rgba(129, 140, 248, 0.9);
+      background: linear-gradient(120deg, rgba(55, 65, 81, 0.8), rgba(30, 64, 175, 0.9));
+    }
+
+    .chip.accent span.label {
+      color: rgba(209, 213, 219, 0.95);
+    }
+
+    .chip.accent span.value {
+      color: #e0f2fe;
+    }
+
+    .hero-floating-tag {
+      position: absolute;
+      right: 0.3rem;
+      bottom: -0.6rem;
+      border-radius: 999px;
+      padding: 0.35rem 0.65rem;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      font-size: 0.7rem;
+      background: rgba(15, 23, 42, 0.95);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-soft);
+    }
+
+    .hero-floating-tag span.dot {
+      height: 7px;
+      width: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+    }
+
+    .social-rail {
+      position: absolute;
+      left: -1rem;
+      top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .social-pill {
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 0.25rem 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      backdrop-filter: blur(10px);
+    }
+
+    .social-pill span.icon {
+      font-size: 0.95rem;
+    }
+
+    .social-icons {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+
+    .social-icon-btn {
+      height: 26px;
+      width: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.96);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .social-icon-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(37, 46, 74, 0.96);
+      border-color: rgba(129, 140, 248, 0.9);
+      color: #e5e7eb;
+    }
+
+    /* Sections wrapper */
+    section {
+      padding: 2.7rem 0;
+      scroll-margin-top: calc(var(--nav-height) + 16px);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-soft);
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .section-description {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      max-width: 28rem;
+    }
+
+    /* About section */
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 2.1rem;
+      align-items: start;
+    }
+
+    .about-card {
+      border-radius: var(--radius-lg);
+      padding: 1.3rem 1.4rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .about-card p {
+      margin-top: 0;
+      margin-bottom: 0.7rem;
+      line-height: 1.6;
+    }
+
+    .about-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.1rem;
+    }
+
+    .fact-item {
+      padding: 0.6rem 0.7rem;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.85);
+      display: flex;
+      flex-direction: column;
+      gap: 0.05rem;
+      font-size: 0.78rem;
+    }
+
+    .fact-item span.label {
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-soft);
+      font-size: 0.7rem;
+    }
+
+    .fact-item span.value {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.82rem;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 0.7rem 1rem;
+    }
+
+    .timeline-dot {
+      position: relative;
+      margin-top: 0.35rem;
+    }
+
+    .timeline-dot::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: -1.3rem;
+      width: 1px;
+      background: rgba(148, 163, 184, 0.4);
+    }
+
+    .timeline-dot span {
+      display: inline-flex;
+      height: 14px;
+      width: 14px;
+      border-radius: 999px;
+      border: 2px solid rgba(129, 140, 248, 0.95);
+      background: #020617;
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.25);
+    }
+
+    .timeline-item:last-child .timeline-dot::before {
+      bottom: 0.4rem;
+    }
+
+    .timeline-tag {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-soft);
+    }
+
+    .timeline-role {
+      font-weight: 500;
+      color: #e5e7eb;
+      margin-top: 0.1rem;
+    }
+
+    .timeline-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 0.6rem;
+      margin-top: 0.25rem;
+      color: var(--text-soft);
+      font-size: 0.76rem;
+    }
+
+    .timeline-meta span.chip-mini {
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    .timeline-summary {
+      margin-top: 0.3rem;
+      color: var(--text-soft);
+      font-size: 0.8rem;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1.2fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .skills-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skill-pill {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .skill-pill.highlight {
+      border-color: rgba(129, 140, 248, 0.95);
+      color: #e5e7eb;
+    }
+
+    .skills-matrix {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .skill-block {
+      padding: 0.8rem 0.85rem;
+      border-radius: 0.9rem;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+      font-size: 0.78rem;
+    }
+
+    .skill-block-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .skill-block-subtitle {
+      font-size: 0.74rem;
+      color: var(--text-soft);
+      margin-bottom: 0.3rem;
+    }
+
+    .skill-level-row {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.74rem;
+      color: var(--text-soft);
+      margin-top: 0.3rem;
+    }
+
+    .level-dots {
+      display: flex;
+      gap: 3px;
+    }
+
+    .level-dot {
+      height: 4px;
+      width: 14px;
+      border-radius: 999px;
+      background: rgba(30, 64, 175, 0.8);
+    }
+
+    .level-dot.dim {
+      background: rgba(30, 64, 175, 0.32);
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.7rem;
+    }
+
+    .project-card {
+      border-radius: 1.1rem;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+      box-shadow: var(--shadow-soft);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      font-size: 0.83rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(79, 70, 229, 0.22), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .project-card-inner {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      height: 100%;
+    }
+
+    .project-media {
+      position: relative;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      overflow: hidden;
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.24), rgba(15, 23, 42, 0.98));
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-media-label {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.7rem;
+      color: rgba(226, 232, 240, 0.82);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+
+    .project-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .project-badge {
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-soft);
+      white-space: nowrap;
+    }
+
+    .project-summary {
+      color: var(--text-soft);
+      font-size: 0.8rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.1rem;
+      font-size: 0.74rem;
+    }
+
+    .tag {
+      padding: 0.16rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .tag.primary {
+      border-color: rgba(129, 140, 248, 0.95);
+      color: #e5e7eb;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+      margin-top: auto;
+      font-size: 0.78rem;
+    }
+
+    .project-links a {
+      text-decoration: none;
+      color: var(--text-soft);
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .project-links a:hover {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: rgba(129, 140, 248, 0.95);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    /* Resume section */
+    .resume-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.1fr);
+      gap: 1.8rem;
+      align-items: start;
+    }
+
+    .resume-card {
+      border-radius: 1rem;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+      padding: 1.1rem 1.2rem;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.84rem;
+    }
+
+    .resume-heading-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      align-items: baseline;
+      margin-bottom: 0.6rem;
+    }
+
+    .resume-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .resume-title {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .resume-contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      margin-bottom: 0.6rem;
+    }
+
+    .resume-section-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+      margin-top: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .resume-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.8rem;
+    }
+
+    .resume-list li {
+      margin-bottom: 0.3rem;
+      color: var(--text-soft);
+    }
+
+    .resume-list li span.key {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .resume-exp-item {
+      margin-top: 0.3rem;
+      padding: 0.45rem 0 0.35rem;
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.45);
+    }
+
+    .resume-exp-item:last-child {
+      border-bottom: none;
+    }
+
+    .resume-exp-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      align-items: baseline;
+      font-size: 0.8rem;
+    }
+
+    .resume-exp-role {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .resume-exp-company {
+      color: var(--text-soft);
+      font-size: 0.78rem;
+    }
+
+    .resume-exp-meta {
+      font-size: 0.74rem;
+      color: var(--text-soft);
+      margin-top: 0.1rem;
+    }
+
+    .resume-bullets {
+      list-style: disc;
+      padding-left: 1.1rem;
+      margin: 0.3rem 0 0.1rem;
+      font-size: 0.77rem;
+      color: var(--text-soft);
+    }
+
+    .resume-bullets li {
+      margin-bottom: 0.15rem;
+    }
+
+    .resume-cta-panel {
+      border-radius: 1rem;
+      padding: 1.1rem 1.2rem;
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at 0 0, rgba(79, 70, 229, 0.19), var(--bg-elevated));
+      box-shadow: var(--shadow-soft);
+      font-size: 0.82rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .resume-cta-panel h3 {
+      font-size: 0.96rem;
+      margin: 0;
+    }
+
+    .resume-cta-panel p {
+      margin: 0;
+      color: var(--text-soft);
+    }
+
+    .resume-download-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      margin-top: 0.4rem;
+    }
+
+    .btn-outline {
+      border-radius: 999px;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      background: transparent;
+      color: var(--text-soft);
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow 150ms ease-out;
+    }
+
+    .btn-outline:hover {
+      background: rgba(15, 23, 42, 0.96);
+      color: #e5e7eb;
+      border-color: rgba(129, 140, 248, 1);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.85);
+    }
+
+    /* Testimonials / highlight */
+    .highlight-strip {
+      margin-top: 1rem;
+      border-radius: 0.9rem;
+      border: 1px dashed rgba(148, 163, 184, 0.55);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.7rem 0.8rem;
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--text-soft);
+    }
+
+    .highlight-strip span.icon {
+      font-size: 1rem;
+    }
+
+    /* Contact */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.8rem;
+      align-items: start;
+    }
+
+    .contact-card {
+      border-radius: 1rem;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+      box-shadow: var(--shadow-soft);
+      padding: 1.1rem 1.2rem;
+      font-size: 0.84rem;
+    }
+
+    .contact-card p {
+      margin: 0 0 0.6rem;
+      color: var(--text-soft);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem 0.9rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.78rem;
+    }
+
+    .form-field label {
+      color: var(--text-soft);
+    }
+
+    .form-field-full {
+      grid-column: 1 / -1;
+    }
+
+    .input, .textarea {
+      border-radius: 0.7rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.96);
+      padding: 0.5rem 0.65rem;
+      font-size: 0.8rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    [data-theme="light"] .input,
+    [data-theme="light"] .textarea {
+      background: rgba(248, 250, 252, 0.9);
+    }
+
+    .input:focus,
+    .textarea:focus {
+      border-color: rgba(129, 140, 248, 0.95);
+      box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.8);
+    }
+
+    .form-footer {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .form-status {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .status-dot {
+      height: 8px;
+      width: 8px;
+      border-radius: 999px;
+      background: var(--accent-2);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .contact-meta-card {
+      border-radius: 1rem;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+      padding: 1.1rem 1.1rem;
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+    }
+
+    .contact-method-main {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .contact-icon {
+      height: 32px;
+      width: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.92rem;
+    }
+
+    .contact-label {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.17em;
+      color: var(--text-soft);
+    }
+
+    .contact-value {
+      font-size: 0.86rem;
+      font-weight: 500;
+    }
+
+    .contact-note {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .contact-link {
+      font-size: 0.74rem;
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.4rem 0 1.5rem;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--text-soft);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid,
+      .about-layout,
+      .skills-grid,
+      .projects-grid,
+      .resume-grid,
+      .contact-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding-top: 2.8rem;
+      }
+
+      .hero-profile {
+        order: -1;
+      }
+
+      .social-rail {
+        left: auto;
+        right: 0;
+      }
+
+      .hero-card-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-stats {
+        order: -1;
+      }
+
+      .projects-grid {
+        gap: 1.2rem;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-actions .btn-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: inline-flex;
+      }
+
+      .mobile-nav-open .nav-links {
+        position: absolute;
+        top: var(--nav-height);
+        right: 0;
+        left: 0;
+        padding: 0.75rem 1.25rem 1rem;
+        background: rgba(6, 8, 24, 0.98);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .about-facts,
+      .skills-matrix {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      section {
+        padding: 2.1rem 0;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-title {
+        font-size: 2.05rem;
+      }
+
+      .hero-meta {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Print styles (for resume) */
+    @media print {
+      body {
+        background: #ffffff;
+        color: #111827;
+      }
+
+      header,
+      .hero,
+      #projects,
+      #skills,
+      #about,
+      #contact,
+      footer {
+        display: none !important;
+      }
+
+      #resume {
+        padding-top: 0;
+      }
+
+      .resume-grid {
+        display: block;
+      }
+
+      .resume-cta-panel {
+        display: none;
+      }
+
+      .resume-card {
+        box-shadow: none;
+        border-color: #d1d5db;
+      }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+<div class="noise-overlay"></div>
+<div class="page-shell">
+  <header>
+    <div class="inner nav">
+      <div class="brand">
+        <div class="brand-avatar">JM</div>
+        <div class="brand-text">
+          <span class="brand-name">Jason McNeary</span>
+          <span class="brand-role">Software Engineer</span>
+        </div>
+      </div>
+      <nav class="nav-links" id="nav-links">
+        <a href="#about" data-nav>About</a>
+        <a href="#skills" data-nav>Skills</a>
+        <a href="#projects" data-nav>Projects</a>
+        <a href="#resume" data-nav>Resume</a>
+        <a href="#contact" data-nav>Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
+          <span id="theme-toggle-icon">🌙</span>
+        </button>
+        <button class="btn-nav" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+          <span class="icon">📬</span>
+          <span>Contact</span>
+        </button>
+        <button class="icon-btn hamburger" id="hamburger" aria-label="Toggle navigation">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="inner">
+        <div class="hero-grid">
+          <div>
+            <div class="pill">
+              <span class="pill-badge">✅</span>
+              <span>Open to senior & staff-level backend/full-stack roles</span>
+            </div>
+            <h1 class="hero-title">
+              Hi, I’m <span class="highlight">Jason McNeary</span> — a software engineer building reliable, human-centered systems.
+            </h1>
+            <p class="hero-subtitle">
+              I specialize in <strong>backend systems</strong>, <strong>APIs</strong>, and <strong>cloud infrastructure</strong> with an eye for clean architecture and developer experience.
+              I enjoy turning ambiguous product ideas into well-designed, resilient software.
+            </p>
+            <div class="hero-badges">
+              <div class="hero-badge"><span class="icon">💻</span> 7+ years professional experience</div>
+              <div class="hero-badge"><span class="icon">☁️</span> AWS · Kubernetes · Docker</div>
+              <div class="hero-badge"><span class="icon">⚙️</span> Go · TypeScript · Python · React</div>
+              <div class="hero-badge"><span class="icon">📈</span> Built systems handling millions of requests/day</div>
+            </div>
+            <div class="hero-cta">
+              <a href="#projects" class="btn-primary">
+                View featured projects
+                <span>↗</span>
+              </a>
+              <button class="btn-ghost" onclick="document.querySelector('#resume').scrollIntoView({behavior:'smooth'})">
+                View printable resume
+              </button>
+            </div>
+            <div class="hero-meta">
+              <span class="strong">Based in San Francisco · Open to remote US & Canada</span>
+              <span class="dot"></span>
+              <span>Preferred stack: Go / TypeScript / React / Postgres / AWS</span>
+            </div>
+          </div>
+
+          <div class="hero-profile">
+            <div class="social-rail">
+              <div class="social-pill">
+                <span class="icon">🔗</span>
+                <span>Let’s connect</span>
+              </div>
+              <div class="social-icons">
+                <a href="https://www.linkedin.com" target="_blank" class="social-icon-btn" aria-label="LinkedIn">in</a>
+                <a href="https://github.com" target="_blank" class="social-icon-btn" aria-label="GitHub">GH</a>
+                <a href="mailto:jason.mcneary@example.com" class="social-icon-btn" aria-label="Email">✉️</a>
+              </div>
+            </div>
+
+            <div class="hero-card">
+              <div class="hero-card-inner">
+                <div class="profile-blob">
+                  <div class="profile-spark"></div>
+                  <div class="profile-initials">JM</div>
+                  <div class="hero-floating-tag">
+                    <span class="dot"></span>
+                    <span>Currently building API platforms</span>
+                  </div>
+                </div>
+                <div class="hero-stats">
+                  <div class="chip accent">
+                    <div>
+                      <span class="label">Primary Focus</span><br />
+                      <span class="value">Distributed systems & backend architectures</span>
+                    </div>
+                  </div>
+                  <div class="chip">
+                    <span class="label">Recent Work</span>
+                    <span class="value">Payments · Analytics · Developer tooling</span>
+                  </div>
+                  <div class="chip">
+                    <span class="label">Impact</span>
+                    <span class="value">Reduced API latency by 42% across key flows</span>
+                  </div>
+                  <div class="chip">
+                    <span class="label">Collaboration</span>
+                    <span class="value">Mentor · Tech lead · Cross-functional partner</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- hero-profile -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="inner">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">About</div>
+            <div class="section-title">Who I am & how I work</div>
+          </div>
+          <p class="section-description">
+            I thrive at the intersection of <strong>product thinking</strong> and <strong>technical depth</strong> —
+            collaborating closely with stakeholders while sweating the details of API design, observability, and reliability.
+          </p>
+        </div>
+
+        <div class="about-layout">
+          <div class="about-card">
+            <p>
+              I’m a software engineer with 7+ years of experience building production systems in high-growth environments.
+              I’ve worked across greenfield initiatives, large refactors, and platform migrations, always with a focus on
+              clarity, maintainability, and business impact.
+            </p>
+            <p>
+              My strengths include designing <strong>clean service boundaries</strong>, building <strong>well-documented APIs</strong>,
+              and collaborating with product, data, and design to ship features that solve real problems.
+            </p>
+            <p>
+              Outside of work, you’ll find me experimenting with home automation projects, contributing to open source, or
+              mentoring early-career engineers.
+            </p>
+
+            <div class="about-facts">
+              <div class="fact-item">
+                <span class="label">Experience</span>
+                <span class="value">7+ years, backend & full-stack</span>
+              </div>
+              <div class="fact-item">
+                <span class="label">Specialties</span>
+                <span class="value">APIs, microservices, distributed systems</span>
+              </div>
+              <div class="fact-item">
+                <span class="label">Currently</span>
+                <span class="value">Senior Software Engineer @ NimbusPay</span>
+              </div>
+              <div class="fact-item">
+                <span class="label">Values</span>
+                <span class="value">Clarity, reliability, empathy, craftsmanship</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"><span></span></div>
+                <div>
+                  <div class="timeline-tag">2022 — Present</div>
+                  <div class="timeline-role">Senior Software Engineer · NimbusPay</div>
+                  <div class="timeline-meta">
+                    <span>San Francisco · Fintech</span>
+                    <span class="chip-mini">Go · Kubernetes · AWS · gRPC</span>
+                  </div>
+                  <div class="timeline-summary">
+                    Lead engineer for the real-time payments platform. Designed and implemented fault-tolerant services
+                    processing thousands of transactions per second, with strong guarantees around idempotency and observability.
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><span></span></div>
+                <div>
+                  <div class="timeline-tag">2019 — 2022</div>
+                  <div class="timeline-role">Software Engineer · Lumen Analytics</div>
+                  <div class="timeline-meta">
+                    <span>Remote · SaaS analytics</span>
+                    <span class="chip-mini">TypeScript · Node.js · React · Postgres</span>
+                  </div>
+                  <div class="timeline-summary">
+                    Built and maintained core analytics pipelines and customer-facing dashboards, collaborating directly with PMs and
+                    data scientists to deliver reliable insights on large-scale datasets.
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><span></span></div>
+                <div>
+                  <div class="timeline-tag">2017 — 2019</div>
+                  <div class="timeline-role">Software Engineer · Horizon Cloud</div>
+                  <div class="timeline-meta">
+                    <span>Seattle · Cloud tooling</span>
+                    <span class="chip-mini">Python · Flask · Docker</span>
+                  </div>
+                  <div class="timeline-summary">
+                    Worked across backend and infrastructure, shipping internal tools and APIs that improved deployment reliability
+                    and developer productivity across the engineering org.
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"><span></span></div>
+                <div>
+                  <div class="timeline-tag">2013 — 2017</div>
+                  <div class="timeline-role">B.S. Computer Science · UC San Diego</div>
+                  <div class="timeline-meta">
+                    <span>Focus: Systems, distributed computing</span>
+                  </div>
+                  <div class="timeline-summary">
+                    Built foundational skills in algorithms, operating systems, and networking, while contributing to campus dev tools
+                    and student-run open-source projects.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- timeline col -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="inner">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Skills</div>
+            <div class="section-title">What I work with day-to-day</div>
+          </div>
+          <p class="section-description">
+            I’m comfortable owning features end-to-end — from API design and data modeling, to implementation, testing, observability,
+            and partnering with stakeholders to measure success.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+          <div>
+            <div class="skills-pill-row">
+              <span class="skill-pill highlight">Go</span>
+              <span class="skill-pill highlight">TypeScript / Node.js</span>
+              <span class="skill-pill highlight">React</span>
+              <span class="skill-pill">Python</span>
+              <span class="skill-pill">PostgreSQL</span>
+              <span class="skill-pill">Redis</span>
+              <span class="skill-pill">Kafka</span>
+              <span class="skill-pill">GraphQL · REST · gRPC</span>
+              <span class="skill-pill">Docker · Kubernetes</span>
+              <span class="skill-pill">AWS (ECS, RDS, SQS, Lambda)</span>
+              <span class="skill-pill">CI/CD · GitHub Actions</span>
+              <span class="skill-pill">Prometheus · OpenTelemetry · Datadog</span>
+            </div>
+
+            <div class="skills-matrix">
+              <div class="skill-block">
+                <div class="skill-block-title">Backend Engineering</div>
+                <div class="skill-block-subtitle">APIs, services & distributed systems</div>
+                <p>Designing resilient, well-documented services with clear contracts, strong observability, and predictable failure modes.</p>
+                <div class="skill-level-row">
+                  <div class="level-dots">
+                    <div class="level-dot"></div>
+                    <div class="level-dot"></div>
+                    <div class="level-dot"></div>
+                    <div class="level-dot"></div>
+                  </div>
+                  <span>Expert level</span>
+                </div>
+              </div>
+              <div class="skill-block">
+                <div class="skill-block-title">Databases & Data</div>
+                <div class="skill-block-subtitle">SQL, modeling & performance</div>
+                <p>Schema design, indexing strategies, query performance, and data flows that support long-term reporting & analytics.</p>
+                <div class="skill-level-row">
+                  <div class="level-dots">
+                    <div class="level-dot"></div>
+                    <div class="level-dot"></div>
+                    <div class="level-dot"></div>
+                    <div class="level-dot dim"></div>
+                  </div>
+                  <span>Advanced</span>
+                </div>
+              </div>
+              <div class="skill-block">
+                <div class="skill-block-title">Frontend & UX</div>
+                <div class="skill-block-subtitle">React & TypeScript</div>
+                <p>Building pragmatic, accessible UIs with a focus on developer experience and maintainable component architectures.</p>
+                <div class="skill-level-row">
+                  <div class="level-dots">
+                    <div class="level-dot"></div>
+                    <div class="level-dot"></div>
+                    <div class="level-dot dim"></div>
+                    <div class="level-dot dim"></div>
+                  </div>
+                  <span>Comfortable</span>
+                </div>
+              </div>
+              <div class="skill-block">
+                <div class="skill-block-title">Collaboration & Leadership</div>
+                <div class="skill-block-subtitle">Mentoring, specs & alignment</div>
+                <p>Driving technical decisions, writing clear design docs, and mentoring teammates through pair programming and code reviews.</p>
+                <div class="skill-level-row">
+                  <div class="level-dots">
+                    <div class="level-dot"></div>
+                    <div class="level-dot"></div>
+                    <div class="level-dot"></div>
+                    <div class="level-dot"></div>
+                  </div>
+                  <span>Strong</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="resume-cta-panel">
+              <h3>How I approach engineering work</h3>
+              <p>
+                I believe great engineering balances <strong>sound technical decisions</strong> with a deep understanding of
+                <strong>user needs</strong> and <strong>business context</strong>. I aim to:
+              </p>
+              <ul class="resume-bullets">
+                <li>Design systems that are easy to reason about, extend, and operate.</li>
+                <li>Communicate clearly — through design docs, diagrams, and async updates.</li>
+                <li>Invest in observability, testing, and deployment safety from the start.</li>
+                <li>Mentor others and leave codebases healthier than I found them.</li>
+              </ul>
+              <div class="highlight-strip">
+                <span class="icon">✨</span>
+                <span>“Jason is the engineer you hand ambiguous problems to, knowing they’ll come back with a clear plan and a pragmatic implementation.”</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="inner">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Projects</div>
+            <div class="section-title">Selected work</div>
+          </div>
+          <p class="section-description">
+            A sample of projects highlighting how I design, build, and ship software — from production systems to polished
+            open-source tools. Additional work samples available on request.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <article class="project-card">
+            <div class="project-card-inner">
+              <div class="project-media">
+                <span class="project-media-label">Real-time payments platform</span>
+              </div>
+              <div class="project-header">
+                <div>
+                  <div class="project-title">NimbusPay Real-Time Payments Engine</div>
+                  <div class="project-summary">
+                    High-throughput payments platform processing thousands of transactions per second with strict latency
+                    and reliability guarantees.
+                  </div>
+                </div>
+                <span class="project-badge">Production · Lead engineer</span>
+              </div>
+              <div class="project-meta">
+                <span class="tag primary">Go</span>
+                <span class="tag primary">PostgreSQL</span>
+                <span class="tag">Kafka</span>
+                <span class="tag">gRPC / REST</span>
+                <span class="tag">Kubernetes · AWS</span>
+              </div>
+              <ul class="resume-bullets">
+                <li>Designed core service architecture, focusing on idempotency, state transitions, and observability.</li>
+                <li>Reduced p95 latency by 42% and cut incident volume by ~30% over 2 quarters via targeted optimizations.</li>
+                <li>Introduced structured logging, distributed tracing, and SLO dashboards for payments flows.</li>
+              </ul>
+              <div class="project-links">
+                <a href="#" aria-label="View case study">
+                  Case study (internal)
+                  <span>↗</span>
+                </a>
+                <a href="#" aria-label="View architecture overview">
+                  Architecture overview
+                  <span>🧩</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card">
+            <div class="project-card-inner">
+              <div class="project-media" style="background: radial-gradient(circle at 0 0, rgba(129,140,248,0.26), rgba(15,23,42,0.98));">
+                <span class="project-media-label">Developer portal & SDK</span>
+              </div>
+              <div class="project-header">
+                <div>
+                  <div class="project-title">DevPortal: API Platform & SDKs</div>
+                  <div class="project-summary">
+                    Unified developer portal, documentation system, and SDKs for internal and external NimbusPay integration partners.
+                  </div>
+                </div>
+                <span class="project-badge">Developer experience</span>
+              </div>
+              <div class="project-meta">
+                <span class="tag primary">TypeScript</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">React</span>
+                <span class="tag">OpenAPI</span>
+                <span class="tag">GitHub Actions</span>
+              </div>
+              <ul class="resume-bullets">
+                <li>Implemented OpenAPI-driven code generation for language-specific SDKs (TypeScript, Go, Python).</li>
+                <li>Built a self-serve portal allowing teams to onboard and manage API credentials with clear rate limits and usage metrics.</li>
+                <li>Improved time-to-first-call for partners from days to under 30 minutes.</li>
+              </ul>
+              <div class="project-links">
+                <a href="#" aria-label="View GitHub repository">
+                  GitHub (sample)
+                  <span>💻</span>
+                </a>
+                <a href="#" aria-label="View docs preview">
+                  Docs preview
+                  <span>📄</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card">
+            <div class="project-card-inner">
+              <div class="project-media" style="background: radial-gradient(circle at 0 0, rgba(34,197,94,0.26), rgba(15,23,42,0.98));">
+                <span class="project-media-label">Analytics & ETL pipeline</span>
+              </div>
+              <div class="project-header">
+                <div>
+                  <div class="project-title">Lumen Analytics Data Pipeline</div>
+                  <div class="project-summary">
+                    Event ingestion, transformation, and analytics layer powering customer dashboards and reporting for SaaS clients.
+                  </div>
+                </div>
+                <span class="project-badge">Scalable data pipeline</span>
+              </div>
+              <div class="project-meta">
+                <span class="tag primary">Python</span>
+                <span class="tag">Airflow</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Redshift</span>
+                <span class="tag">S3</span>
+              </div>
+              <ul class="resume-bullets">
+                <li>Redesigned ETL workflows to be idempotent and composable, with clear schema evolution patterns.</li>
+                <li>Cut daily pipeline runtime by ~35% through indexing, batching strategies, and targeted optimizations.</li>
+                <li>Collaborated with data science to standardize metrics definitions across the org.</li>
+              </ul>
+              <div class="project-links">
+                <a href="#" aria-label="View technical write-up">
+                  Technical write-up
+                  <span>📝</span>
+                </a>
+                <a href="#" aria-label="View monitoring dashboard">
+                  Monitoring & alerts
+                  <span>📊</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card">
+            <div class="project-card-inner">
+              <div class="project-media" style="background: radial-gradient(circle at 0 0, rgba(248,113,113,0.26), rgba(15,23,42,0.98));">
+                <span class="project-media-label">Open-source side project</span>
+              </div>
+              <div class="project-header">
+                <div>
+                  <div class="project-title">Servicemap: Microservice Topology Visualizer</div>
+                  <div class="project-summary">
+                    Open-source tool that visualizes service dependencies and health in real time using traces & metrics.
+                  </div>
+                </div>
+                <span class="project-badge">Open source · Maintainer</span>
+              </div>
+              <div class="project-meta">
+                <span class="tag primary">Go</span>
+                <span class="tag primary">React</span>
+                <span class="tag">WebSockets</span>
+                <span class="tag">OpenTelemetry</span>
+                <span class="tag">Docker</span>
+              </div>
+              <ul class="resume-bullets">
+                <li>Built a graph-based UI for exploring service dependencies, error hotspots, and latency distributions.</li>
+                <li>Supports ingesting traces from OpenTelemetry collectors and visualizing them as interactive diagrams.</li>
+                <li>Used by several small teams internally to debug cross-service issues and plan refactors.</li>
+              </ul>
+              <div class="project-links">
+                <a href="#" aria-label="View GitHub repository">
+                  GitHub
+                  <span>⭐</span>
+                </a>
+                <a href="#" aria-label="View live demo">
+                  Live demo (sandbox)
+                  <span>▶</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume">
+      <div class="inner">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Resume</div>
+            <div class="section-title">One-page summary</div>
+          </div>
+          <p class="section-description">
+            This section is formatted to print cleanly as a single-page resume. Use the
+            “Download / Print Resume” button below to generate a PDF via your browser’s print dialog.
+          </p>
+        </div>
+
+        <div class="resume-grid">
+          <!-- Resume content -->
+          <div class="resume-card">
+            <div class="resume-heading-row">
+              <div>
+                <div class="resume-name">Jason McNeary</div>
+                <div class="resume-title">Senior Software Engineer · Backend & Platform</div>
+              </div>
+              <div class="resume-contact-row">
+                <span>San Francisco, CA</span>
+                <span>·</span>
+                <span>jason.mcneary@example.com</span>
+                <span>·</span>
+                <span>github.com/jmcneary</span>
+              </div>
+            </div>
+
+            <div class="resume-section-title">Experience</div>
+
+            <div class="resume-exp-item">
+              <div class="resume-exp-header">
+                <div>
+                  <div class="resume-exp-role">Senior Software Engineer</div>
+                  <div class="resume-exp-company">NimbusPay · Fintech</div>
+                </div>
+                <div class="resume-exp-meta">2022 — Present · San Francisco, CA</div>
+              </div>
+              <ul class="resume-bullets">
+                <li>Lead engineer for the real-time payments platform handling thousands of TPS with strict latency & reliability SLAs.</li>
+                <li>Designed and implemented core Go services, with emphasis on idempotency, service boundaries, and observability.</li>
+                <li>Reduced p95 latency across key flows by ~42% and incident count by ~30% through targeted architectural improvements.</li>
+                <li>Drove adoption of tracing, logging standards, and SLO dashboards across the backend team.</li>
+              </ul>
+            </div>
+
+            <div class="resume-exp-item">
+              <div class="resume-exp-header">
+                <div>
+                  <div class="resume-exp-role">Software Engineer</div>
+                  <div class="resume-exp-company">Lumen Analytics</div>
+                </div>
+                <div class="resume-exp-meta">2019 — 2022 · Remote</div>
+              </div>
+              <ul class="resume-bullets">
+                <li>Built and maintained event ingestion, ETL, and analytics APIs used by enterprise SaaS customers.</li>
+                <li>Redesigned parts of the data model to support complex multi-tenant reporting and long-term analytics.</li>
+                <li>Implemented React-based dashboards with real-time data and flexible filtering, working closely with design & data teams.</li>
+                <li>Mentored junior engineers and improved onboarding docs, reducing ramp-up time by ~25%.</li>
+              </ul>
+            </div>
+
+            <div class="resume-exp-item">
+              <div class="resume-exp-header">
+                <div>
+                  <div class="resume-exp-role">Software Engineer</div>
+                  <div class="resume-exp-company">Horizon Cloud</div>
+                </div>
+                <div class="resume-exp-meta">2017 — 2019 · Seattle, WA</div>
+              </div>
+              <ul class="resume-bullets">
+                <li>Built internal tools and APIs in Python to streamline deployments and environment management.</li>
+                <li>Containerized legacy services and contributed to the team’s Docker/Kubernetes migration.</li>
+                <li>Collaborated with SREs to define monitoring, alerting, and runbooks for critical services.</li>
+              </ul>
+            </div>
+
+            <div class="resume-section-title">Education</div>
+            <ul class="resume-list">
+              <li>
+                <span class="key">B.S. Computer Science</span>, University of California, San Diego (2013 — 2017)
+                — Focus: Systems, Distributed Computing
+              </li>
+            </ul>
+
+            <div class="resume-section-title">Technical Skills</div>
+            <ul class="resume-list">
+              <li><span class="key">Languages:</span> Go, TypeScript/JavaScript, Python, SQL</li>
+              <li><span class="key">Backend:</span> Microservices, REST, gRPC, GraphQL, WebSockets</li>
+              <li><span class="key">Web:</span> React, Next.js, Node.js, Express, API Gateway</li>
+              <li><span class="key">Data:</span> PostgreSQL, MySQL, Redis, Kafka, Redshift, S3</li>
+              <li><span class="key">Infra & DevOps:</span> Docker, Kubernetes, AWS (ECS, RDS, SQS, Lambda), CI/CD</li>
+              <li><span class="key">Observability:</span> OpenTelemetry, Prometheus, Datadog, Grafana</li>
+            </ul>
+
+            <div class="resume-section-title">Selected Highlights</div>
+            <ul class="resume-list">
+              <li>Designed a real-time payments engine with strong observability and failure handling.</li>
+              <li>Led creation of an internal developer portal and API SDKs, significantly improving integration velocity.</li>
+              <li>Maintains “Servicemap”, an open-source tool for visualizing microservice dependencies and health.</li>
+            </ul>
+          </div>
+
+          <!-- Resume CTA -->
+          <div class="resume-cta-panel">
+            <h3>Download / print a PDF-ready version</h3>
+            <p>
+              This site embeds a printable, one-page resume layout. Use your browser’s print dialog to export to PDF
+              or print directly.
+            </p>
+            <div class="resume-download-row">
+              <button class="btn-outline" onclick="window.print()">
+                <span>🖨️</span>
+                <span>Download / Print Resume</span>
+              </button>
+              <span style="font-size: 0.75rem; color: var(--text-soft);">
+                Tip: Choose “Save as PDF” in your browser’s print dialog.
+              </span>
+            </div>
+
+            <div class="resume-section-title" style="margin-top: 1.1rem;">Quick facts</div>
+            <ul class="resume-list">
+              <li><span class="key">Preferred roles:</span> Senior / Staff Backend or Platform Engineer</li>
+              <li><span class="key">Location:</span> SF Bay Area · Open to remote US/Canada</li>
+              <li><span class="key">Visa:</span> US citizen (no sponsorship required)</li>
+            </ul>
+
+            <div class="highlight-strip">
+              <span class="icon">💬</span>
+              <span>Available for engineering roles where I can own systems end-to-end and mentor teammates. Happy to share additional code samples or system design work on request.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="inner">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Contact</div>
+            <div class="section-title">Let’s talk</div>
+          </div>
+          <p class="section-description">
+            Whether you’re hiring, looking for a collaborator, or just want to chat about systems design, feel free to reach out.
+            I respond quickest via email or LinkedIn.
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <div class="contact-card">
+            <p>
+              This form doesn’t send anywhere by default (it’s a static portfolio), but you can wire it up to your preferred
+              backend or email service. For now, it validates input and showcases how I’d structure a simple contact flow.
+            </p>
+
+            <form id="contact-form" onsubmit="return handleSubmit(event)">
+              <div class="form-grid">
+                <div class="form-field">
+                  <label for="name">Name</label>
+                  <input class="input" id="name" name="name" required placeholder="Your name" />
+                </div>
+                <div class="form-field">
+                  <label for="email">Email</label>
+                  <input class="input" id="email" name="email" type="email" required placeholder="you@example.com" />
+                </div>
+                <div class="form-field form-field-full">
+                  <label for="subject">Subject</label>
+                  <input class="input" id="subject" name="subject" required placeholder="What would you like to discuss?" />
+                </div>
+                <div class="form-field form-field-full">
+                  <label for="message">Message</label>
+                  <textarea class="textarea" id="message" name="message" rows="4" required placeholder="Tell me a bit about the role, project, or idea."></textarea>
+                </div>
+              </div>
+              <div class="form-footer">
+                <button type="submit" class="btn-primary">
+                  <span>Send message</span>
+                  <span>📨</span>
+                </button>
+                <div class="form-status" id="form-status">
+                  <div class="status-dot"></div>
+                  <span>Form is demo-only. No data will be sent.</span>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <aside class="contact-meta-card">
+            <div class="contact-method">
+              <div class="contact-method-main">
+                <div class="contact-icon">✉️</div>
+                <div>
+                  <div class="contact-label">Email</div>
+                  <div class="contact-value">jason.mcneary@example.com</div>
+                  <div class="contact-note">Best for roles, collaborations, and introductions.</div>
+                </div>
+              </div>
+              <a class="contact-link" href="mailto:jason.mcneary@example.com">Email me</a>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-method-main">
+                <div class="contact-icon">💼</div>
+                <div>
+                  <div class="contact-label">LinkedIn</div>
+                  <div class="contact-value">linkedin.com/in/jason-mcneary</div>
+                  <div class="contact-note">Let’s connect and chat about opportunities.</div>
+                </div>
+              </div>
+              <a class="contact-link" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">View profile</a>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-method-main">
+                <div class="contact-icon">🐙</div>
+                <div>
+                  <div class="contact-label">GitHub</div>
+                  <div class="contact-value">github.com/jmcneary</div>
+                  <div class="contact-note">Code samples, tools, and open-source contributions.</div>
+                </div>
+              </div>
+              <a class="contact-link" href="https://github.com" target="_blank" rel="noopener noreferrer">View repositories</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="inner">
+      <div class="footer-row">
+        <div>© <span id="year"></span> Jason McNeary. All rights reserved.</div>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Dynamic year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Theme toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-toggle-icon');
+  const storedTheme = window.localStorage.getItem('theme');
+
+  function setTheme(theme) {
+    document.body.setAttribute('data-theme', theme);
+    themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    window.localStorage.setItem('theme', theme);
+  }
+
+  if (storedTheme === 'light' || storedTheme === 'dark') {
+    setTheme(storedTheme);
+  }
+
+  themeToggle.addEventListener('click', function () {
+    const current = document.body.getAttribute('data-theme') || 'dark';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  // Simple mobile nav toggle
+  const hamburger = document.getElementById('hamburger');
+  const header = document.querySelector('header');
+
+  hamburger.addEventListener('click', function () {
+    header.classList.toggle('mobile-nav-open');
+  });
+
+  // Smooth scroll & active nav link
+  const navLinks = document.querySelectorAll('[data-nav]');
+
+  function onScroll() {
+    const scrollPos = window.scrollY + 100;
+    navLinks.forEach(link => {
+      const sectionId = link.getAttribute('href');
+      const section = document.querySelector(sectionId);
+      if (!section) return;
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
+      if (scrollPos >= top && scrollPos < bottom) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Demo contact form
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formStatus = document.getElementById('form-status');
+    formStatus.innerHTML = '<div class="status-dot"></div><span>Thanks! This demo form does not send data, but this is where your submission logic would go.</span>';
+    return false;
+  }
+</script>
+</body>
+</html>
